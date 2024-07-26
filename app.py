@@ -61,11 +61,11 @@ if st.button('Load'):
             if st.session_state['url_job'] is not None:
                 texts_web_content = ct.ParserContent.parser_web_page(st.session_state['url_job']) 
                 # return cv formatted
-                extracted_content = ct.ParserContent.create_cv_by_schema(cv_content= st.session_state['text_cv'],job_content= texts_web_content[0].page_content, llm=llm, schema=schema, language_option=language_option)
+                extracted_content = ct.ParserContent.create_cv_by_schema(cv_content= st.session_state['text_cv'],job_content= texts_web_content[0].page_content, llm=llm, language_option=language_option)
             # For pasted job description
             if st.session_state['raw_text_job_description'] is not None:
                 # return cv formatted
-                extracted_content = ct.ParserContent.create_cv_by_schema(cv_content= st.session_state['text_cv'],job_content= st.session_state['raw_text_job_description'], llm=llm, schema=schema, language_option=language_option)
+                extracted_content = ct.ParserContent.create_cv_by_schema(cv_content= st.session_state['text_cv'],job_content= st.session_state['raw_text_job_description'], llm=llm, language_option=language_option)
 
             success_message = st.success(icon="✅", body="DONE!")
 
