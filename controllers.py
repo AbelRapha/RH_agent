@@ -19,14 +19,8 @@ class ParserContent():
     temperature=0.5,
     max_tokens=10000
     )
-        schema =  """{
-        "nome_do_cargo_da_vaga": "Qual o nome da vaga de acordo com a descrição?"},
-        "requesitos_da_vaga": "Quais são os requesitos técnicos e não técnicos descritos na vaga?"},
-        "qualificacoes_para_a_vaga": "Quais sãos as qualificações exigidas para a vaga?"},
-        "tecnologias_necessarias_para_a_vaga": "Quais tecnologias e ferramentas requeridas na vaga?"},
-        }""",
 
-        return llm, schema
+        return llm
 
     def parser_pdf(pdf):
         # opening pdf file 
@@ -58,7 +52,7 @@ class ParserContent():
 
         return texts
     
-    def create_cv_by_schema(cv_content:str, job_content:str, llm, schema, language_option):
+    def create_cv_by_schema(cv_content:str, job_content:str, llm, language_option):
         
         prompt_template_to_get_job_description = ChatPromptTemplate.from_messages(
             [
@@ -89,7 +83,7 @@ class ParserContent():
 
         chain_cv = prompt_template_to_generate_cv | llm | StrOutputParser()
 
-        result_chain_job_description = chain_job_description.invoke({"schema":schema,"job_content":job_content})
+        result_chain_job_description = chain_job_description.invoke({"job_content":job_content})
 
         return chain_cv.invoke({"language":language_option,"cv_content":cv_content, "context": result_chain_job_description})
     

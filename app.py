@@ -54,7 +54,7 @@ if st.button('Load'):
         if st.session_state['url_job'] or st.session_state['raw_text_job_description'] and st.session_state['text_cv'] is not None:
             
             # Get the configs
-            llm,schema = ct.ParserContent.configs_ai_model(st.session_state['API_KEY'])
+            llm = ct.ParserContent.configs_ai_model(st.session_state['API_KEY'])
             # Get the infos of the description job
 
             # For URL
